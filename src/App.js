@@ -1,11 +1,7 @@
-
+import Layouts from "./Components/Layouts/Layouts";
 
 function App() {
-  return (
-    <div>
-      Hello React
-    </div>
-  );
+  return (<Layouts />);
 }
 
 export default App;
