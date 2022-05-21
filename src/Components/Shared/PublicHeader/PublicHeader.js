@@ -1,19 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import CustomLink from '../../CustomLink/CustomLink';
+import userImg from '../../../images/user.png'
 
 const PublicHeader = () => {
     return (
-        <div className='bg-pink-100'>
-            <div className=' max-w-[1920] px-[80px] py-[20px] flex justify-between items-center'>
-                <h1>Logo</h1>
+        <div className='border bg-white sticky top-0'>
+            <div className='shadow max-w-[1920] px-[80px] py-[14px] flex justify-between items-center'>
+                <h1 className='text-2xl font-bold uppercase'><Link to='/'>Portion Tags</Link></h1>
                 <div>
-                    <nav className='space-x-8'>
-                        <Link className='hover:border-b-4 px-1 border-gray-700 py-[20px]' to='/'>Home</Link>
-                        <Link to='/'>About</Link>
-                        <Link to='/login'>Login</Link>
-                        <Link to='/register'>Register</Link>
-                        <Link to='/'>Contact</Link>
+                    <nav className='flex items-center gap-8'>
+                        <CustomLink to='/'>Home</CustomLink>
+                        <CustomLink to='/login'>Login</CustomLink>
+                        <CustomLink to='/register'>Register</CustomLink>
                     </nav>
+                </div>
+                <div className='flex items-center gap-2'>
+                    <img className='w-7 h-7 bg-cover' src={userImg} alt="" />
+                    <p className='text-base font-semibold'>Rakibul Islam</p>
                 </div>
             </div>
         </div>
