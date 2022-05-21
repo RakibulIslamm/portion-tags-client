@@ -1,9 +1,10 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 const PrivateLayout = () => {
     return (
         <div>
-            This is private Layout
+            <Outlet />
         </div>
     );
 };

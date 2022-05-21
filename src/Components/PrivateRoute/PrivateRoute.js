@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom";
 
-function RequireAuth({ children }) {
+function PrivateRoute({ children }) {
     let user = true;
     let location = useLocation();
 
@@ -11,4 +11,4 @@ function RequireAuth({ children }) {
     return children;
 }
 
-export default RequireAuth;
+export default PrivateRoute;
