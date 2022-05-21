@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Dashboard from '../Dashboard/Dashboard';
 import Home from '../Home/Home';
 import Login from '../Login/Login';
+import PageNotFound from '../PageNotFound/PageNotFound';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import PrivateLayout from './PrivateLayout/PrivateLayout';
 import PublicLayout from './PublicLayout/PublicLayout';
@@ -21,7 +22,7 @@ const Layouts = () => {
                 <Route path='/dashboard' element={<PrivateRoute><PrivateLayout /></PrivateRoute>}>
                     <Route index element={<Dashboard />} />
                 </Route>
-
+                <Route path='*' element={<PageNotFound />} />
             </Routes>
         </>
     );
