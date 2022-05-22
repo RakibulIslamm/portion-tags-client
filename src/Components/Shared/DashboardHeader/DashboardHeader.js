@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PrivateHeader = () => {
+const DashboardHeader = () => {
     return (
         <div>
             <h3>This is Private Header</h3>
@@ -8,4 +8,4 @@ const PrivateHeader = () => {
     );
 };
 
-export default PrivateHeader;
+export default DashboardHeader;

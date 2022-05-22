@@ -1,5 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import AdminRoute from '../AdminRoute/AdminRoute';
+import ManageAllOrders from '../Dashboard/AdminPages/ManageAllOrders/ManageAllOrders';
 import Dashboard from '../Dashboard/Dashboard';
 import Home from '../Home/Home';
 import Login from '../Login/Login';
@@ -21,6 +23,7 @@ const Layouts = () => {
                 {/* These are private routes */}
                 <Route path='/dashboard' element={<PrivateRoute><PrivateLayout /></PrivateRoute>}>
                     <Route index element={<Dashboard />} />
+                    <Route path='manage-all-orders' element={<AdminRoute> <ManageAllOrders /> </AdminRoute>} />
                 </Route>
                 <Route path='*' element={<PageNotFound />} />
             </Routes>

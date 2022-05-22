@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PrivateFooter = () => {
+const DashboardFooter = () => {
     return (
         <div>
             This is Private footer
@@ -8,4 +8,4 @@ const PrivateFooter = () => {
     );
 };
 
-export default PrivateFooter;
+export default DashboardFooter;

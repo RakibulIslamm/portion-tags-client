@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const PageNotFound = () => {
     return (
@@ -8,14 +9,14 @@ const PageNotFound = () => {
                 Page Not Found
             </div>
             <div className="mt-5">
-                <button onClick={() => window.history.back()} className="relative inline-block text-sm font-medium text-[#FF6A3D] group active:text-orange-500 focus:outline-none focus:ring" type='button'>
+                <Link to='/' className="relative inline-block text-sm font-medium text-[#FF6A3D] group active:text-orange-500 focus:outline-none focus:ring" type='button'>
                     <span
                         className="absolute inset-0 transition-transform translate-x-0.5 translate-y-0.5 bg-[#FF6A3D] group-hover:translate-y-0 group-hover:translate-x-0"
                     ></span>
                     <span className="relative block px-8 py-3 bg-[#1A2238] border border-current">
-                        <span >Go Back</span>
+                        <span >Go Home</span>
                     </span>
-                </button>
+                </Link>
             </div>
         </div>
     );

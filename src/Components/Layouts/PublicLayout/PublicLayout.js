@@ -1,11 +1,11 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import PublicHeader from '../../Shared/PublicHeader/PublicHeader';
+import Header from '../../Shared/Header/Header';
 
 const PublicLayout = () => {
     return (
         <>
-            <PublicHeader />
+            <Header />
             <Outlet />
         </>
     );
