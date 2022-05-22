@@ -15,12 +15,12 @@ const Header = () => {
                         <CustomLink to='/'>Home</CustomLink>
                     </nav>
                 </div>
-                {user && <div className='flex items-center gap-8'>
+                {user && <div className='flex items-center gap-5'>
                     <Link to='/dashboard'>Dashboard</Link>
-                    <div className='flex items-center gap-2'>
-                        <img className='w-7 h-7 bg-cover' src={user.photoURL || userImg} alt="" />
+                    <img className='w-7 h-7 bg-cover' src={user.photoURL || userImg} alt="" />
+                    {/* <div className='flex items-center gap-2'>
                         <p className='text-base font-semibold'>{user.displayName}</p>
-                    </div>
+                    </div> */}
                 </div>}
                 {!user && <div className='flex items-center gap-4'>
                     <Link to='/login'>Login</Link>
