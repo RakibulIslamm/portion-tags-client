@@ -7,6 +7,7 @@ import Home from '../Home/Home';
 import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import Register from '../Register/Register';
 import PrivateLayout from './PrivateLayout/PrivateLayout';
 import PublicLayout from './PublicLayout/PublicLayout';
 
@@ -18,6 +19,7 @@ const Layouts = () => {
                 <Route path='/' element={<PublicLayout />}>
                     <Route index element={<Home />} />
                     <Route path='login' element={<Login />} />
+                    <Route path='register' element={<Register />} />
                 </Route>
 
                 {/* These are private routes */}
