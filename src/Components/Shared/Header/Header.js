@@ -7,7 +7,7 @@ import useAuth from '../../../hooks/useAuth';
 const Header = () => {
     const { user } = useAuth();
     return (
-        <div className='border bg-white sticky top-0'>
+        <div className='border bg-white sticky top-0 z-50'>
             <div className='shadow max-w-[1920] px-[80px] py-[14px] flex justify-between items-center'>
                 <h1 className='text-2xl font-bold uppercase'><Link to='/'>Portion Tags</Link></h1>
                 <div>
