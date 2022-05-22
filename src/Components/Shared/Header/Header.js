@@ -2,9 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import CustomLink from '../../CustomLink/CustomLink';
 import userImg from '../../../images/user.png'
+import useAuth from '../../../hooks/useAuth';
 
 const Header = () => {
-    const user = true;
+    const { user } = useAuth();
     return (
         <div className='border bg-white sticky top-0'>
             <div className='shadow max-w-[1920] px-[80px] py-[14px] flex justify-between items-center'>
@@ -17,8 +18,8 @@ const Header = () => {
                 {user && <div className='flex items-center gap-8'>
                     <Link to='/dashboard'>Dashboard</Link>
                     <div className='flex items-center gap-2'>
-                        <img className='w-7 h-7 bg-cover' src={userImg} alt="" />
-                        <p className='text-base font-semibold'>Rakibul Islam</p>
+                        <img className='w-7 h-7 bg-cover' src={user.photoURL || userImg} alt="" />
+                        <p className='text-base font-semibold'>{user.displayName}</p>
                     </div>
                 </div>}
                 {!user && <div className='flex items-center gap-4'>

@@ -5,7 +5,7 @@ import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const { googleSignIn, login, user, setUser, isLoading, logOut, error, setError } = useAuth()
+    const { googleSignIn, login, user, setUser, isLoading, isLoading2, logOut, error, setError } = useAuth()
     console.log(user);
 
     const navigate = useNavigate()
@@ -14,11 +14,6 @@ const Login = () => {
     useEffect(() => {
         setError(false)
     }, [setError]);
-
-
-    if (isLoading) {
-        return
-    }
 
 
     const handleGoogleLogin = () => {
@@ -35,6 +30,10 @@ const Login = () => {
         login(data.email, data.password, location, navigate, reset);
     };
 
+    if (isLoading2) {
+        return
+    }
+
     // Handle Logout
     const handleLogOut = () => {
         logOut();
@@ -43,25 +42,24 @@ const Login = () => {
 
     return (
         <div className='flex justify-center items-center min-h-screen py-10'>
-            {!user ? <div className="block p-6 rounded-lg shadow-lg bg-white border w-2/6">
+            {!user && <div className="block p-6 rounded-lg shadow-lg bg-white border w-2/6">
                 <h2 className='text-2xl font-bold text-center pb-8'>Login</h2>
                 {error && <p className='text-red-500 text-md font-semibold italic'>{error}</p>}
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group mb-6">
                         <label htmlFor="exampleInputEmail2" className="form-label inline-block mb-2 text-gray-700">Email address</label>
-                        <input type="email" {...register("email", { required: true })} className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Enter email" />
+                        <input type="email" {...register("email", { required: true })} className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Enter email" />
                         <p className='text-red-400 text-xs italic'>{errors.email?.type === 'required' && "Email is required"}</p>
                     </div>
                     <div className="form-group mb-6">
                         <label htmlFor="exampleInputPassword2" className="form-label inline-block mb-2 text-gray-700">Password</label>
-                        <input type="password" {...register("password", { required: true })} className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInputPassword2"
-                            placeholder="Password" />
+                        <input type="password" {...register("password", { required: true })} className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Password" />
                         <p className='text-red-400 text-xs italic'>{errors.password?.type === 'required' && "Password is required"}</p>
                     </div>
                     <div className="flex justify-between items-center mb-6">
                         <button className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out">Forgot password?</button>
                     </div>
-                    <button type="submit" className="w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Login</button>
+                    <button type="submit" className="w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">{isLoading ? 'Loading...' : 'Login'}</button>
                     <p className="text-gray-800 mt-6 text-center">Not a member? <Link to="/register"
                         className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out">Register</Link>
                     </p>
@@ -73,7 +71,7 @@ const Login = () => {
                         </svg> Sign in with google
                     </button>
                 </div>
-            </div> : <p>You are already logged in <br /><button className='text-blue-500' onClick={handleLogOut}>Log Out</button></p>}
+            </div>} {user && <p>You are already logged in <br /><button className='text-blue-500' onClick={handleLogOut}>Log Out</button></p>}
         </div>
     );
 };

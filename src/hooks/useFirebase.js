@@ -76,7 +76,7 @@ const useFirebase = () => {
                     .then(() => {
                         toast.success('Verification Mail Sent Your Email');
                     });
-                navigate('/')
+                navigate('/dashboard')
                 reset();
             })
             .catch((error) => {
@@ -98,6 +98,7 @@ const useFirebase = () => {
 
             }
             setIsLoading(false);
+            setIsLoading2(false);
         })
     }, [auth]);
 

@@ -1,5 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import useAuth from '../../hooks/useAuth';
 import AdminRoute from '../AdminRoute/AdminRoute';
 import ManageAllOrders from '../Dashboard/AdminPages/ManageAllOrders/ManageAllOrders';
 import Dashboard from '../Dashboard/Dashboard';
@@ -8,10 +11,17 @@ import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import Register from '../Register/Register';
+import Spinner from '../Spinner/Spinner';
 import PrivateLayout from './PrivateLayout/PrivateLayout';
 import PublicLayout from './PublicLayout/PublicLayout';
 
 const Layouts = () => {
+    const { isLoading2 } = useAuth();
+
+    if (isLoading2) {
+        return <Spinner />
+    }
+
     return (
         <>
             <Routes>
@@ -29,6 +39,7 @@ const Layouts = () => {
                 </Route>
                 <Route path='*' element={<PageNotFound />} />
             </Routes>
+            <ToastContainer />
         </>
     );
 };

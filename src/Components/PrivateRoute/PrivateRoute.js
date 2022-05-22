@@ -1,8 +1,13 @@
 import { Navigate, useLocation } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 function PrivateRoute({ children }) {
-    let user = true;
+    let { user, isLoading } = useAuth();
     let location = useLocation();
+
+    if (isLoading) {
+        return
+    }
 
     if (!user) {
         return <Navigate to="/login" state={{ from: location }} replace />;
