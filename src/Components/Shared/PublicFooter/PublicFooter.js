@@ -8,7 +8,7 @@ const PublicFooter = () => {
                 <div className="flex justify-between px-[80px] py-10">
                     <div className="mb-6 md:mb-0">
                         <Link to="https://flowbite.com" className="flex items-center">
-                            <img src="" className="mr-3 h-8" alt="FlowBite Logo" />
+                            <img src="" className="mr-3 h-8" alt="Portion Tags Logo" />
                             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Portion Tags</span>
                         </Link>
                     </div>
