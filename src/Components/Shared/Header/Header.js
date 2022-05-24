@@ -25,7 +25,7 @@ const Header = () => {
     };
 
     return (
-        <header className='max-w-[1920] px-[80px] h-[60px] flex justify-between items-center sticky z-50 text-white mix-blend-difference'>
+        <header className='max-w-[1920] px-[80px] h-[60px] flex justify-between items-center sticky z-50 text-white mix-blend-difference border-b border-gray-600'>
             <h1 className='text-2xl font-bold uppercase'><Link to='/'>Portion Tags</Link></h1>
             <div>
                 <nav className='flex items-center gap-8 font-light tracking-widest'>
