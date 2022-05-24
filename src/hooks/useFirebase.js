@@ -8,6 +8,7 @@ firebaseInitAuthentication();
 
 const useFirebase = () => {
     const [user, setUser] = useState(null);
+    // const [admin, setAdmin] = useState(null);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const [isLoading2, setIsLoading2] = useState(true);
@@ -102,6 +103,36 @@ const useFirebase = () => {
         })
     }, [auth]);
 
+    // Save user data on db
+    /* const savedDataOnDb = (name, email) => {
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ displayName: name, email })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    // setAlert(true);
+                }
+            })
+            .catch(error => console.log(error))
+    }
+
+    // Checking the admin
+    useEffect(() => {
+        if (!user) return
+        const url = `https://murmuring-beyond-78221.herokuapp.com/admin/${user?.email}`;
+        fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                setAdmin(data.admin)
+            })
+            .catch(error => setError(error))
+    }, [user]); */
+
     // Logout
     const logOut = () => {
         signOut(auth)
@@ -122,6 +153,7 @@ const useFirebase = () => {
         isLoading,
         setIsLoading,
         isLoading2,
+        // admin,
         setIsLoading2,
         logOut
     }

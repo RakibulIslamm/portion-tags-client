@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Product from './Product/Product';
 
 const Products = () => {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        fetch('https://portion-tags.herokuapp.com/products')
+            .then(res => res.json())
+            .then(data => setProducts(data))
+            .catch(error => console.log(error))
+    }, [])
+
+    console.log(products);
+
     return (
         <div className='py-12'>
             <div className='px-[80px] max-w-[1920px] mx-auto'>
@@ -11,12 +22,7 @@ const Products = () => {
                     <div className='border border-gray-300 flex-1'></div>
                 </div>
                 <div className='grid grid-cols-3 gap-6'>
-                    <Product />
-                    <Product />
-                    <Product />
-                    <Product />
-                    <Product />
-                    <Product />
+                    {products.slice(0, 6).map(product => <Product key={product._id} product={product} />)}
                 </div>
             </div>
         </div>

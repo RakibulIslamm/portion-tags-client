@@ -10,6 +10,7 @@ import Home from '../Home/Home';
 import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import PurchasePage from '../PurchasePage/PurchasePage';
 import Register from '../Register/Register';
 import Spinner from '../Spinner/Spinner';
 import PrivateLayout from './PrivateLayout/PrivateLayout';
@@ -30,9 +31,10 @@ const Layouts = () => {
                     <Route index element={<Home />} />
                     <Route path='login' element={<Login />} />
                     <Route path='register' element={<Register />} />
+                    <Route path='/purchase/:id' element={<PrivateRoute><PurchasePage /></PrivateRoute>} />
                 </Route>
 
-                {/* These are private routes */}
+                {/* These are dashboard routes */}
                 <Route path='/dashboard' element={<PrivateRoute><PrivateLayout /></PrivateRoute>}>
                     <Route index element={<Dashboard />} />
                     <Route path='manage-all-orders' element={<AdminRoute> <ManageAllOrders /> </AdminRoute>} />
