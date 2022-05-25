@@ -4,8 +4,13 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useAuth from '../../hooks/useAuth';
 import AdminRoute from '../AdminRoute/AdminRoute';
+import AddProduct from '../Dashboard/AdminPages/AddProduct/AddProduct';
+import AllUsers from '../Dashboard/AdminPages/AllUsers/AllUsers';
 import ManageAllOrders from '../Dashboard/AdminPages/ManageAllOrders/ManageAllOrders';
+import ManageAllProducts from '../Dashboard/AdminPages/ManageAllProducts/ManageAllProducts';
 import Dashboard from '../Dashboard/Dashboard';
+import AddReview from '../Dashboard/UsersPages/AddReview/AddReview';
+import MyOrders from '../Dashboard/UsersPages/MyOrders/MyOrders';
 import Home from '../Home/Home';
 import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
@@ -37,7 +42,12 @@ const Layouts = () => {
                 {/* These are dashboard routes */}
                 <Route path='/dashboard' element={<PrivateRoute><PrivateLayout /></PrivateRoute>}>
                     <Route index element={<Dashboard />} />
-                    <Route path='manage-all-orders' element={<AdminRoute> <ManageAllOrders /> </AdminRoute>} />
+                    <Route path='my-orders' element={<MyOrders />} />
+                    <Route path='add-review' element={<AddReview />} />
+                    <Route path='manage-orders' element={<AdminRoute> <ManageAllOrders /> </AdminRoute>} />
+                    <Route path='manage-products' element={<AdminRoute> <ManageAllProducts /> </AdminRoute>} />
+                    <Route path='add-product' element={<AdminRoute> <AddProduct /> </AdminRoute>} />
+                    <Route path='all-users' element={<AdminRoute> <AllUsers /> </AdminRoute>} />
                 </Route>
                 <Route path='*' element={<PageNotFound />} />
             </Routes>

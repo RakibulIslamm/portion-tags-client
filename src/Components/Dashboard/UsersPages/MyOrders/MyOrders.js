@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react';
-import OrderRow from './OrderRow/OrderRow';
+import React, { useEffect, useState } from 'react';
+import useAuth from '../../../../hooks/useAuth';
+import MyOrderRow from './MyOrderRow/MyOrderRow';
 
-const ManageAllOrders = () => {
-    const [orders, setOrders] = React.useState([]);
-    const [loading, setLoading] = React.useState(false);
+const MyOrders = () => {
+    const [orders, setOrders] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const { user, isLoading } = useAuth();
 
     useEffect(() => {
         setLoading(true);
-        fetch('http://localhost:5000/orders')
+        fetch(`http://localhost:5000/orders?email=${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 setOrders(data);
@@ -31,7 +33,6 @@ const ManageAllOrders = () => {
                         <thead className="bg-gray-900 w-full">
                             <tr className="text-white text-left">
                                 <th className="font-semibold text-sm uppercase px-6 py-4"> Item </th>
-                                <th className="font-semibold text-sm uppercase px-6 py-4"> Email </th>
                                 <th className="font-semibold text-sm uppercase px-6 py-4"> Quantity </th>
                                 <th className="font-semibold text-sm uppercase px-6 py-4"> Status</th>
                                 <th className="font-semibold text-sm uppercase px-6 py-4 text-center"> Action </th>
@@ -52,7 +53,7 @@ const ManageAllOrders = () => {
                                     </td>
                                 </tr>
                             </tbody> : <tbody className="divide-y divide-gray-200">
-                                {orders.map(order => <OrderRow key={order._id} order={order} handleDelete={handleDelete} />)}
+                                {orders.map(order => <MyOrderRow key={order._id} order={order} handleDelete={handleDelete} />)}
                             </tbody>
                         }
                     </table>
@@ -62,4 +63,4 @@ const ManageAllOrders = () => {
     );
 };
 
-export default ManageAllOrders;
+export default MyOrders;

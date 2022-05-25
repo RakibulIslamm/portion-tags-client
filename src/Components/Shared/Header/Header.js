@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import CustomLink from '../../CustomLink/CustomLink';
 import userImg from '../../../images/user.png'
 import useAuth from '../../../hooks/useAuth';
+import customLink from '../../CustomLink/CustomLink';
 
 const Header = () => {
     const { user } = useAuth();
-    // const isStickyClass = 'sticky top-0 w-full z-50 shadow bg-red-500'
+    const { HeaderLink } = customLink();
 
     // Sticky Menu Area
     useEffect(() => {
@@ -15,6 +15,7 @@ const Header = () => {
             window.removeEventListener('scroll', isSticky);
         };
     });
+
 
 
     /* Method that will fix header after a specific scrollable */
@@ -29,10 +30,10 @@ const Header = () => {
             <h1 className='text-2xl font-bold uppercase'><Link to='/'>Portion Tags</Link></h1>
             <div>
                 <nav className='flex items-center gap-8 font-light tracking-widest'>
-                    <CustomLink to='/'>Home</CustomLink>
-                    <CustomLink to='/about'>About</CustomLink>
-                    <CustomLink to='/about'>Services</CustomLink>
-                    <CustomLink to='/about'>Resources</CustomLink>
+                    <HeaderLink to='/'>Home</HeaderLink>
+                    <HeaderLink to='/about'>About</HeaderLink>
+                    <HeaderLink to='/about'>Services</HeaderLink>
+                    <HeaderLink to='/about'>Resources</HeaderLink>
                 </nav>
             </div>
             {user && <div className='flex items-center gap-5'>

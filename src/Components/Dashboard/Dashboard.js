@@ -1,18 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
+import SideBar from './SideBar/SideBar';
 
 const Dashboard = () => {
-
-    const admin = false;
+    const [isOpen, setIsOpen] = useState(true);
+    const admin = true;
     const user = true;
+
+    console.log(isOpen);
 
     return (
         <>
-            <div>
-                {
-                    admin && user ? <div>Admin Sidebar</div> :
-                        <div>User Sidebar</div>
-                }
-            </div>
+            Welcome To Dashboard
         </>
     );
 };

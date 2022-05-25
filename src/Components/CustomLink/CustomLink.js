@@ -1,20 +1,40 @@
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 
-function CustomLink({ children, to, ...props }) {
-    let resolved = useResolvedPath(to);
-    let match = useMatch({ path: resolved.pathname, end: true });
+function customLink() {
+    const HeaderLink = ({ children, to, ...props }) => {
+        let resolved = useResolvedPath(to);
+        let match = useMatch({ path: resolved.pathname, end: true });
+        return (
+            <div>
+                <Link
+                    className={`${match ? 'font-bold text-orange-600' : ''}`}
+                    to={to}
+                    {...props}
+                >
+                    {children}
+                </Link>
+            </div>
+        );
+    }
 
-    return (
-        <>
-            <Link
-                className={`hover:font-semibold ${match && 'font-semibold'} transition-all ease-linear duration-150`}
-                to={to}
-                {...props}
-            >
-                {children}
-            </Link>
-        </>
-    );
+    const SideBarLink = ({ children, to, ...props }) => {
+        let resolved = useResolvedPath(to);
+        let match = useMatch({ path: resolved.pathname, end: true });
+        return (
+            <div>
+                <Link
+                    className={`${match && 'rounded-sm bg-gray-800 text-gray-50 font-bold block'} hover:rounded-sm hover:bg-gray-800 hover:text-gray-50 block`}
+                    to={to}
+                    {...props}
+                >
+                    {children}
+                </Link>
+            </div>
+        );
+    }
+
+    return { HeaderLink, SideBarLink }
+
 }
 
-export default CustomLink;
+export default customLink;

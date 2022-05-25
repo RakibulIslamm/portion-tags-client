@@ -1,7 +1,7 @@
 import { Navigate, useLocation } from "react-router-dom";
 
 function AdminRoute({ children }) {
-    let admin = false;
+    let admin = true;
     let location = useLocation();
 
     if (!admin) {

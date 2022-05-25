@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-const PurchaseForm = ({ user, minOrder, quantity, id }) => {
+const PurchaseForm = ({ user, product }) => {
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { ProductName, minOrder, quantity, _id, img } = product;
 
     const [quantityInput, setQuantityInput] = useState(minOrder);
     // console.log(quantityInput);
 
 
     const onSubmit = data => {
-        const orderData = { ...data, name: user.displayName, email: user.email, productId: id };
+        const orderData = { ...data, status: false, paid: false, ProductName, img, name: user.displayName, email: user.email, productId: _id };
         console.log(orderData);
         fetch('http://localhost:5000/orders', {
             method: 'POST',
@@ -57,7 +58,7 @@ const PurchaseForm = ({ user, minOrder, quantity, id }) => {
                     <label htmlFor="name">Quantity</label>
                     <input {...register("quantity", { required: true })} className='px-5 py-2 border w-full bg-gray-200 focus:bg-white rounded' name='quantity' type="number" onChange={(e) => setQuantityInput(e.target.value)} placeholder={minOrder} />
                     <p className='text-red-500 text-xs italic'>{errors.quantity?.type === 'required' && "Quantity is required"}</p>
-                    <p className='text-red-500 text-xs italic'>{quantityInput < minOrder ? 'Minimum Order limit 20' : ''}</p>
+                    <p className='text-red-500 text-xs italic'>{quantityInput < minOrder ? `Minimum Order limit ${minOrder}` : ''}</p>
                     <p className='text-red-500 text-xs italic'>{quantityInput > quantity ? "You can't order more than available items" : ''}</p>
                 </div>
                 <div className='w-2/3'>
