@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const MyOrderRow = ({ order }) => {
-    const { status, ProductName, quantity, payment, transectionId, img, orderId } = order;
+const MyOrderRow = ({ order, handleDelete }) => {
+    const { status, ProductName, quantity, paid, transectionId, img, orderId, _id } = order;
     return (
         <tr>
             <td className="px-6 py-4">
@@ -21,8 +21,16 @@ const MyOrderRow = ({ order }) => {
             <td className="px-6 py-4">
                 <p className="text-gray-500 text-sm font-semibold tracking-wide">{status ? 'Shipped' : 'Pending'}</p>
             </td>
-            <td className="px-6 py-4 text-center"> <button className="text-white text-sm bg-red-600 font-semibold px-4 py-1 rounded-full"> Delete </button> </td>
-            <td className="px-6 py-4 text-center"> <Link to="/edit-inventory/id" className="text-purple-800 hover:underline">{payment ? transectionId : 'Payment'}</Link>
+            <td className="px-6 py-4 text-center">
+                {
+                    !paid || !transectionId ?
+                        <button onClick={() => handleDelete(_id)} className="text-white text-sm bg-red-600 font-semibold px-4 py-1 rounded-full"> Delete </button> :
+                        <button className="text-white text-sm bg-green-400 font-semibold px-4 py-1 rounded-full"> Paid </button>}
+            </td>
+            <td className="px-6 py-4 text-center"> {
+                !paid ? <Link to="/edit-inventory/id" className="text-purple-800 hover:underline">Payment</Link> :
+                    <p>{transectionId}</p>
+            }
             </td>
         </tr>
     );

@@ -43,7 +43,7 @@ const SideBar = ({ setIsOpen, isOpen }) => {
                         <SideBarLink to='/dashboard/add-review'>
                             <span className="flex items-center p-2 space-x-3 rounded-md">
                                 <BsFillStarFill className='text-xl' />
-                                <span>Add Review</span>
+                                <span>Add A Review</span>
                             </span>
                         </SideBarLink>
 

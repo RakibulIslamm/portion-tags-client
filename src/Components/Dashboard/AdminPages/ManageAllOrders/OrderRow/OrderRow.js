@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const OrderRow = ({ order }) => {
-    const { status, quantity, ProductName, img, email } = order;
+const OrderRow = ({ order, handleDelete, shippedOrder }) => {
+    const { status, quantity, ProductName, img, email, _id, productId, paid, transectionId } = order;
+
     return (
         <tr>
             <td className="px-6 py-4">
-                <Link to={`/inventory-details/'{_id}'`}>
+                <Link to={`/purchase/${productId}`}>
                     <div className="flex items-center space-x-3">
                         <div className="inline-flex w-10 h-10 bg-cover"> <img className='w-10 h-10 object-cover rounded-full' alt='User avatar' src={img} /> </div>
                         <div>
@@ -16,16 +17,21 @@ const OrderRow = ({ order }) => {
                 </Link>
             </td>
             <td className="px-6 py-4">
-                <p className="text-gray-500 text-sm font-semibold tracking-wide"> {email} </p>
+                <p className="text-gray-500 text-xs font-base tracking-wide break-all"> {email} </p>
             </td>
             <td className="px-6 py-4">
                 <p className="text-gray-500 text-sm font-semibold tracking-wide">{quantity}</p>
             </td>
             <td className="px-6 py-4">
-                <p className="text-gray-500 text-sm font-semibold tracking-wide">{status ? 'Shipped' : 'Pending'}</p>
+                <div className='flex items-center gap-3'>
+                    <p className="text-gray-500 text-sm font-semibold tracking-wide">{status ? 'Shipped' : 'Pending'}</p>
+                    {!status && <button onClick={() => shippedOrder(_id)} className='text-sm bg-yellow-500 px-1 rounded-full'>Approve</button>}
+                </div>
             </td>
-            <td className="px-6 py-4 text-center"> <button className="text-white text-sm bg-red-600 font-semibold px-4 py-1 rounded-full"> Delete </button> </td>
-            <td className="px-6 py-4 text-center"> <Link to="/edit-inventory/id" className="text-purple-800 hover:underline">Paid</Link>
+            <td className="px-6 py-4 text-center">
+                {!paid || !transectionId ? <button onClick={() => handleDelete(_id)} className="text-white text-sm bg-red-600 font-semibold px-4 py-1 rounded-full"> Delete </button> : <p className="text-gray-500 text-sm font-semibold tracking-wide">Paid</p>}
+            </td>
+            <td className="px-6 py-4 text-center"> <p className='text-sm'>{paid || transectionId ? 'Paid' : 'Unpaid'}</p>
             </td>
         </tr>
     );

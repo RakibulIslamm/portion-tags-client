@@ -3,9 +3,6 @@ import { Outlet } from 'react-router-dom';
 import SideBar from '../../Dashboard/SideBar/SideBar';
 
 const PrivateLayout = () => {
-    const [isOpen, setIsOpen] = useState(true);
-
-    console.log(isOpen);
 
     return (
         <>
@@ -13,7 +10,7 @@ const PrivateLayout = () => {
                 <div className=''>
                     <SideBar />
                 </div>
-                <div className='w-full p-10'>
+                <div className='w-full'>
                     <Outlet />
                 </div>
             </div>

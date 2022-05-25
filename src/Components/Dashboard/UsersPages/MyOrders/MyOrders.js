@@ -5,7 +5,7 @@ import MyOrderRow from './MyOrderRow/MyOrderRow';
 const MyOrders = () => {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(false);
-    const { user, isLoading } = useAuth();
+    const { user } = useAuth();
 
     useEffect(() => {
         setLoading(true);
@@ -16,10 +16,25 @@ const MyOrders = () => {
                 setLoading(false);
             })
             .catch(err => console.log(err));
-    }, []);
+    }, [user]);
 
-    const handleDelete = () => {
-
+    const handleDelete = (id) => {
+        setLoading(true);
+        const confirm = window.confirm('Are you sure you want to delete this order?');
+        if (confirm) {
+            fetch(`http://localhost:5000/orders/${id}`, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    setOrders(orders.filter(order => order._id !== id));
+                    setLoading(false);
+                })
+                .catch(err => console.log(err));
+        }
+        else {
+            setLoading(false);
+        }
     }
 
     return (
@@ -36,7 +51,7 @@ const MyOrders = () => {
                                 <th className="font-semibold text-sm uppercase px-6 py-4"> Quantity </th>
                                 <th className="font-semibold text-sm uppercase px-6 py-4"> Status</th>
                                 <th className="font-semibold text-sm uppercase px-6 py-4 text-center"> Action </th>
-                                <th className="font-semibold text-sm uppercase px-6 py-4 text-center"> </th>
+                                <th className="font-semibold text-sm uppercase px-6 py-4 text-center">Payment Id</th>
                             </tr>
                         </thead>
                         {
@@ -49,7 +64,7 @@ const MyOrders = () => {
                             </tbody> : !orders.length ? <tbody className="divide-y divide-gray-200">
                                 <tr>
                                     <td className="px-6 py-4">
-                                        <p className="text-gray-500 text-xl font-semibold tracking-wide"> Product Not Found </p>
+                                        <p className="text-gray-500 text-xl font-semibold tracking-wide"> You Have No Order </p>
                                     </td>
                                 </tr>
                             </tbody> : <tbody className="divide-y divide-gray-200">
