@@ -8,7 +8,7 @@ firebaseInitAuthentication();
 
 const useFirebase = () => {
     const [user, setUser] = useState(null);
-    // const [admin, setAdmin] = useState(null);
+    const [admin, setAdmin] = useState(null);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const [isLoading2, setIsLoading2] = useState(true);
@@ -77,6 +77,7 @@ const useFirebase = () => {
                     .then(() => {
                         toast.success('Verification Mail Sent Your Email');
                     });
+                savedDataOnDb(user.displayName, user.email);
                 navigate('/dashboard')
                 reset();
             })
@@ -99,14 +100,13 @@ const useFirebase = () => {
 
             }
             setIsLoading(false);
-            setIsLoading2(false);
         })
     }, [auth]);
 
     // Save user data on db
-    /* const savedDataOnDb = (name, email) => {
+    const savedDataOnDb = (name, email) => {
         fetch('http://localhost:5000/users', {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
@@ -115,23 +115,28 @@ const useFirebase = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.insertedId) {
-                    // setAlert(true);
+                    console.log('Data saved successfully');
                 }
             })
             .catch(error => console.log(error))
     }
 
+
     // Checking the admin
+
     useEffect(() => {
         if (!user) return
-        const url = `https://murmuring-beyond-78221.herokuapp.com/admin/${user?.email}`;
+        const url = `http://localhost:5000/admin/${user?.email}`;
         fetch(url)
             .then(res => res.json())
             .then(data => {
                 setAdmin(data.admin)
             })
             .catch(error => setError(error))
-    }, [user]); */
+            .finally(() => {
+                setIsLoading2(false)
+            })
+    }, [user]);
 
     // Logout
     const logOut = () => {
@@ -153,7 +158,8 @@ const useFirebase = () => {
         isLoading,
         setIsLoading,
         isLoading2,
-        // admin,
+        savedDataOnDb,
+        admin,
         setIsLoading2,
         logOut
     }
@@ -161,3 +167,30 @@ const useFirebase = () => {
 }
 
 export default useFirebase;
+
+/* // Make admin
+app.put('/make-admin/:email', async (req, res) => {
+    const email = req.body.email;
+    const CurrentUserEmail = req.params.email;
+    const user = await userCollection.findOne({ email: CurrentUserEmail });
+    console.log(user);
+    if (!user) {
+        res.json('403 Forbidden')
+    }
+    else if (user.role === 'admin') {
+        const filter = { email: email };
+        const dbUser = await userCollection.findOne(filter);
+        if (dbUser) {
+            const updateDoc = { $set: { role: 'admin' } };
+            const result = await userCollection.updateOne(filter, updateDoc);
+            res.json(result);
+        }
+        else {
+            res.json({ error: `We Couldn't find this ${email} user` });
+        }
+    }
+    else {
+        res.json({ error: "You are not authorize" });
+    }
+
+}); */

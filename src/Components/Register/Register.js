@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 const Register = () => {
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const { signUp, googleSignIn, user, setUser, isLoading, error, setError, logOut } = useAuth();
+    const { signUp, googleSignIn, savedDataOnDb, user, setUser, isLoading, error, setError, logOut } = useAuth();
 
     const navigate = useNavigate()
     const location = useLocation();
@@ -24,6 +24,7 @@ const Register = () => {
         googleSignIn()
             .then(result => {
                 setUser(result.user);
+                savedDataOnDb(result.user.displayName, result.user.email);
                 navigate(url);
             })
     }

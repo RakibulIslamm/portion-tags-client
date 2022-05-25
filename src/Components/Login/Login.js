@@ -5,8 +5,7 @@ import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const { googleSignIn, login, user, setUser, isLoading, isLoading2, logOut, error, setError } = useAuth()
-    console.log(user);
+    const { googleSignIn, login, savedDataOnDb, user, setUser, isLoading, isLoading2, logOut, error, setError } = useAuth()
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -21,6 +20,7 @@ const Login = () => {
         googleSignIn()
             .then(result => {
                 setUser(result.user);
+                savedDataOnDb(result.user.displayName, result.user.email);
                 navigate(url);
             })
     }

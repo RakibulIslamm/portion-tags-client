@@ -15,8 +15,6 @@ const Products = () => {
             .finally(() => setLoading(false));
     }, [])
 
-    console.log(products);
-
     return (
         <div className='py-12'>
             <div className='px-[80px] max-w-[1920px] mx-auto'>

@@ -11,8 +11,8 @@ const MyProfile = () => {
             <Header />
             <div className='px-[80px] max-w-[1920px] mx-auto'>
                 <div className='flex items-center w-full min-h-screen'>
-                    <div className='flex items-start gap-6 w-full'>
-                        <div className='w-[250px] min-h-[80vh] -mt-10 p-4 bg-gray-900 text-white rounded-xl flex flex-col justify-between'>
+                    <div className='flex items-start gap-6 w-full py-6'>
+                        <div className='w-[250px] min-h-[80vh] p-4 bg-gray-900 text-white rounded-xl flex flex-col justify-between'>
                             <div className='space-y-3'>
                                 <SideBarLink to='/profile'>
                                     <span className="flex items-center p-2 space-x-3 rounded-md">
@@ -41,7 +41,7 @@ const MyProfile = () => {
                             </div>
                             <Link className='px-3 py-2 bg-blue-800 w-full rounded flex items-center gap-3' to='/profile/edit-profile'><BsPencilSquare /> Edit Profile</Link>
                         </div>
-                        <div className='-mt-6 flex-1'>
+                        <div className='flex-1'>
                             <Outlet />
                         </div>
                     </div>
