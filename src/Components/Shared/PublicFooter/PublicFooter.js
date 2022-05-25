@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { BsNutFill } from 'react-icons/bs';
 
 const PublicFooter = () => {
     return (
@@ -7,8 +8,8 @@ const PublicFooter = () => {
             <footer className="">
                 <div className="flex justify-between px-[80px] py-10">
                     <div className="mb-6 md:mb-0">
-                        <Link to="https://flowbite.com" className="flex items-center">
-                            <img src="" className="mr-3 h-8" alt="Portion Tags Logo" />
+                        <Link to="/" className="flex items-center gap-2">
+                            <BsNutFill className='text-3xl text-white' />
                             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Portion Tags</span>
                         </Link>
                     </div>

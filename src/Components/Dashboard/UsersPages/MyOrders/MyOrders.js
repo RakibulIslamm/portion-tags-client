@@ -13,9 +13,9 @@ const MyOrders = () => {
             .then(res => res.json())
             .then(data => {
                 setOrders(data);
-                setLoading(false);
             })
-            .catch(err => console.log(err));
+            .catch(err => console.log(err))
+            .finally(() => setLoading(false));
     }, [user]);
 
     const handleDelete = (id) => {
@@ -41,7 +41,7 @@ const MyOrders = () => {
         <div className='min-h-screen'>
             <div className='px-[80px] xs:px-4 sm:px-10 max-w-[1920px] mx-auto'>
                 <div className='my-5 flex items-center gap-5'>
-                    <h2 className='text-2xl xs:text-lg xs:w-full font-semibold'>Manage Inventory</h2>
+                    <h2 className='text-2xl xs:text-lg xs:w-full font-semibold'>My Orders</h2>
                 </div>
                 <div className='overflow-x-auto border'>
                     <table className='mx-auto w-full rounded-lg bg-white divide-y divide-gray-300'>

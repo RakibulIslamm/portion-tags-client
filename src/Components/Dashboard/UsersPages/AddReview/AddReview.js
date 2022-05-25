@@ -9,7 +9,7 @@ const AddReview = () => {
     const [loading, setLoading] = useState(false);
     const { user } = useAuth();
 
-    const [values, setValues] = useState({ rating: 5 });
+    const [values, setValues] = useState({ rating: 4.5 });
 
     const onChange = (value, name) => {
         setValues((prevValues) => ({ ...prevValues, [name]: value }));

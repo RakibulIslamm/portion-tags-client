@@ -11,9 +11,9 @@ const ManageAllOrders = () => {
             .then(res => res.json())
             .then(data => {
                 setOrders(data);
-                setLoading(false);
             })
-            .catch(err => console.log(err));
+            .catch(err => console.log(err))
+            .finally(() => setLoading(false));
     }, []);
 
     const handleDelete = (id) => {

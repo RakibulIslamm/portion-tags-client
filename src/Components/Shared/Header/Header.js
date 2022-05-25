@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import userImg from '../../../images/user.png'
 import useAuth from '../../../hooks/useAuth';
 import customLink from '../../CustomLink/CustomLink';
+import { BsNutFill } from 'react-icons/bs'
 
 const Header = () => {
-    const { user } = useAuth();
+    const { user, logOut } = useAuth();
     const { HeaderLink } = customLink();
 
     // Sticky Menu Area
@@ -27,7 +28,10 @@ const Header = () => {
 
     return (
         <header className='max-w-[1920] px-[80px] h-[60px] flex justify-between items-center sticky z-50 text-white mix-blend-difference border-b border-gray-600'>
-            <h1 className='text-2xl font-bold uppercase'><Link to='/'>Portion Tags</Link></h1>
+            <div className='flex items-center gap-3'>
+                <BsNutFill className='text-2xl' />
+                <h1 className='text-2xl font-bold uppercase'><Link to='/'>Portion Tags</Link></h1>
+            </div>
             <div>
                 <nav className='flex items-center gap-8 font-light tracking-widest'>
                     <HeaderLink to='/'>Home</HeaderLink>
@@ -37,11 +41,9 @@ const Header = () => {
                 </nav>
             </div>
             {user && <div className='flex items-center gap-5'>
+                <button onClick={logOut}>Log Out</button>
                 <Link to='/dashboard'>Dashboard</Link>
-                <img className='w-7 h-7 bg-cover' src={user.photoURL || userImg} alt="" />
-                {/* <div className='flex items-center gap-2'>
-                        <p className='text-base font-semibold'>{user.displayName}</p>
-                    </div> */}
+                <img className='w-7 h-7 bg-cover' src={userImg} alt="" />
             </div>}
             {!user && <div className='flex items-center gap-4'>
                 <Link to='/login'>Login</Link>

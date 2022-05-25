@@ -20,7 +20,7 @@ const Register = () => {
     };
 
     const handleGoogleLogin = () => {
-        const url = location?.state?.from || '/';
+        const url = location?.state?.from || '/dashboard';
         googleSignIn()
             .then(result => {
                 setUser(result.user);
