@@ -40,7 +40,7 @@ const Register = () => {
 
 
     return (
-        <div className='flex justify-center items-center min-h-screen py-10 -mt-[20px]'>
+        <div className='flex justify-center items-center min-h-screen py-10 xs:py-6 -mt-[20px]'>
             {!user ? <div className="p-8 rounded-lg shadow-lg bg-white max-w-lg border">
                 <h2 className='text-2xl font-bold text-center pb-8'>Register</h2>
                 {error && <p className='text-red-500 text-md font-semibold italic'>{error}</p>}

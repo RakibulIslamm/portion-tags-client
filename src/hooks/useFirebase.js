@@ -38,8 +38,9 @@ const useFirebase = () => {
                     .then(res => res.json())
                     .then(data => {
                         localStorage.setItem('token', data.token);
-                        navigate(url);
                     })
+                    .catch(error => console.log(error));
+                navigate(url);
                 reset();
             })
             .catch((error) => {
@@ -96,8 +97,11 @@ const useFirebase = () => {
                     .then(res => res.json())
                     .then(data => {
                         localStorage.setItem('token', data.token);
-                        navigate('/dashboard');
                     })
+                    .catch((error) => {
+                        setError(error.Message)
+                    });
+                navigate('/dashboard');
                 reset();
             })
             .catch((error) => {

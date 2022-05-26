@@ -29,10 +29,11 @@ const Login = () => {
                     .then(res => res.json())
                     .then(data => {
                         localStorage.setItem('token', data.token);
-                        navigate(url);
                     })
                     .catch(error => console.log(error));
+                navigate(url);
             })
+            .catch(error => setError(error.code));
     }
 
     // Handle Login
@@ -51,7 +52,7 @@ const Login = () => {
 
 
     return (
-        <div className='flex justify-center items-center min-h-screen py-10 xs:px-6'>
+        <div className='flex justify-center items-center min-h-screen py-10 xs:py-4 xs:px-6'>
             {!user && <div className="block p-6 rounded-lg shadow-lg bg-white border w-2/6 xs:w-full">
                 <h2 className='text-2xl font-bold text-center pb-8'>Login</h2>
                 {error && <p className='text-red-500 text-md font-semibold italic'>{error}</p>}

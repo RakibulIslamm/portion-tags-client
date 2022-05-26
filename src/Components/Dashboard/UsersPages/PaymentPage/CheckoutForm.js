@@ -1,5 +1,6 @@
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 // Checkout form 
@@ -13,6 +14,7 @@ const CheckoutForm = ({ order }) => {
     const { price, quantity, name, email, _id } = order;
     const amount = parseFloat((price * quantity).toFixed(2));
 
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch('https://portion-tags.herokuapp.com/create-payment-intent', {
@@ -115,6 +117,7 @@ const CheckoutForm = ({ order }) => {
                     .catch(err => console.log(err));
 
                 setProcessing(false);
+                navigate('/dashboard/my-orders')
             }
         }
         finally {

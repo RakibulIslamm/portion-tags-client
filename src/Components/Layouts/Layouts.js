@@ -76,7 +76,7 @@ const Layouts = () => {
                 </Route>
                 <Route path='*' element={<PageNotFound />} />
             </Routes>
-            <ToastContainer />
+            <ToastContainer position="bottom-right" />
         </>
     );
 };
