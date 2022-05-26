@@ -5,7 +5,7 @@ const PrivateLayout = () => {
 
     return (
         <>
-            <div className='flex'>
+            <div className='flex bg-gray-100'>
                 <div className=' xs:hidden'>
                     <SideBar />
                 </div>

@@ -8,8 +8,8 @@ import Products from './Products/Products';
 import Reviews from './Reviews/Reviews';
 
 const Home = () => {
-    const { user } = useAuth()
-    console.log(user);
+    // const { user } = useAuth()
+    // console.log(user);
     return (
         <>
             <Banner />

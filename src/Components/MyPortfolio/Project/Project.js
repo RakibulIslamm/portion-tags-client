@@ -2,7 +2,6 @@ import React from 'react';
 import './project.css'
 
 const Project = ({ project }) => {
-    console.log(project);
     const { projectName, coverImg, shortDesc, liveLink } = project;
     return (
         <div className="w-full h-80 filter backdrop-blur-lg bg-red-500">

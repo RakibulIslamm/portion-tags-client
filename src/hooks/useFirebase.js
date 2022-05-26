@@ -30,7 +30,7 @@ const useFirebase = () => {
             .then((result) => {
                 setUser(result.user)
                 const url = location?.state?.from || '/dashboard';
-                fetch('http://localhost:5000/login', {
+                fetch('https://portion-tags.herokuapp.com/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: result.user.email })
@@ -88,7 +88,7 @@ const useFirebase = () => {
                         toast.success('Verification Mail Sent Your Email');
                     });
                 savedDataOnDb(user.displayName, user.email);
-                fetch('http://localhost:5000/login', {
+                fetch('https://portion-tags.herokuapp.com/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: result.user.email })

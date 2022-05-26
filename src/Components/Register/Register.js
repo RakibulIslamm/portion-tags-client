@@ -45,7 +45,7 @@ const Register = () => {
                 <h2 className='text-2xl font-bold text-center pb-8'>Register</h2>
                 {error && <p className='text-red-500 text-md font-semibold italic'>{error}</p>}
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 xs:grid-cols-1 gap-4">
                         <div className="form-group mb-6">
                             <input type="text" {...register("firstName", { required: true })} className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="First name" />
                             <p className='text-red-400 text-xs italic'>{errors.firstName?.type === 'required' && "First Name is required"}</p>

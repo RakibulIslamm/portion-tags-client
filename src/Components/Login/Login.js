@@ -21,7 +21,7 @@ const Login = () => {
             .then(result => {
                 setUser(result.user);
                 savedDataOnDb(result.user.displayName, result.user.email);
-                fetch('http://localhost:5000/login', {
+                fetch('https://gadget-stock.herokuapp.com/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: result.user.email })
@@ -31,9 +31,7 @@ const Login = () => {
                         localStorage.setItem('token', data.token);
                         navigate(url);
                     })
-            })
-            .catch(err => {
-                console.log(err)
+                    .catch(error => console.log(error));
             })
     }
 
@@ -53,8 +51,8 @@ const Login = () => {
 
 
     return (
-        <div className='flex justify-center items-center min-h-screen py-10'>
-            {!user && <div className="block p-6 rounded-lg shadow-lg bg-white border w-2/6">
+        <div className='flex justify-center items-center min-h-screen py-10 xs:px-6'>
+            {!user && <div className="block p-6 rounded-lg shadow-lg bg-white border w-2/6 xs:w-full">
                 <h2 className='text-2xl font-bold text-center pb-8'>Login</h2>
                 {error && <p className='text-red-500 text-md font-semibold italic'>{error}</p>}
                 <form onSubmit={handleSubmit(onSubmit)}>

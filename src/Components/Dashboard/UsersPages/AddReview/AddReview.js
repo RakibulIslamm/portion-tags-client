@@ -18,7 +18,7 @@ const AddReview = () => {
 
     const onSubmit = data => {
         setLoading(true);
-        const ratingsData = { name: user.displayName, reviewText: data.reviewText, rating: values.rating }
+        const ratingsData = { name: user.displayName, reviewText: data.reviewText, rating: values.rating, img: user.photoURL }
         fetch('https://portion-tags.herokuapp.com/reviews', {
             method: 'POST',
             headers: {
@@ -50,11 +50,11 @@ const AddReview = () => {
                 <h1 className='text-2xl font-bold'>Please Add A Review</h1>
                 <form onSubmit={handleSubmit(onSubmit)} className="w-8/12 xs:w-full sm:w-full flex items-center flex-col">
                     <div className="w-full">
-                        <div className='w-6/12 mx-auto'>
+                        <div className='w-6/12 xs:w-full mx-auto'>
                             <input className="bg-gray-200 px-5 py-3 block w-full outline-none focus:bg-white border focus:border-gray-500 rounded my-2" type="text" {...register("name")} value={user.displayName} disabled />
                         </div>
 
-                        <div className='w-6/12 mx-auto'>
+                        <div className='w-6/12 xs:w-full mx-auto'>
                             <textarea className="bg-gray-200 px-5 py-3 block w-full xs:w-full outline-none focus:bg-white border focus:border-gray-500 rounded my-2" type="number" {...register("reviewText", { required: true })} placeholder="Write Something" />
                             {errors?.price?.type === "required" && <p className="text-left text-xs text-red-600 w-8/12">This field is required</p>}
                         </div>

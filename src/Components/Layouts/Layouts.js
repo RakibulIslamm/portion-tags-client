@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useAuth from '../../hooks/useAuth';
 import AdminRoute from '../AdminRoute/AdminRoute';
-import Blogs from '../Blogs/Blogs';
+import Blogs from '../Blogs/Blog';
 import AddProduct from '../Dashboard/AdminPages/AddProduct/AddProduct';
 import AllUsers from '../Dashboard/AdminPages/AllUsers/AllUsers';
 import MakeAdmin from '../Dashboard/AdminPages/MakeAdmin/MakeAdmin';

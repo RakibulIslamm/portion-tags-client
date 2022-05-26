@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const OrderRow = ({ order, handleDelete, shippedOrder }) => {
-    const { status, quantity, ProductName, img, email, _id, productId, paid, transectionId } = order;
+    const { status, quantity, ProductName, img, email, _id, productId, paid, transactionId } = order;
 
     return (
         <tr>
@@ -29,9 +29,9 @@ const OrderRow = ({ order, handleDelete, shippedOrder }) => {
                 </div>
             </td>
             <td className="px-6 xs:px-2 py-4 text-center">
-                {!paid || !transectionId ? <button onClick={() => handleDelete(_id)} className="text-white text-sm bg-red-600 font-semibold px-4 py-1 rounded-full"> Delete </button> : <p className="text-gray-500 text-sm font-semibold tracking-wide">Paid</p>}
+                {!paid || !transactionId ? <button onClick={() => handleDelete(_id)} className="text-white text-sm bg-red-600 font-semibold px-4 py-1 rounded-full"> Delete </button> : <p className="text-gray-500 text-sm font-semibold tracking-wide">Paid</p>}
             </td>
-            <td className="px-6 py-4 text-center"> <p className='text-sm'>{paid || transectionId ? 'Paid' : 'Unpaid'}</p>
+            <td className="px-6 py-4 text-center"> <p className='text-sm'>{paid || transactionId ? 'Paid' : 'Unpaid'}</p>
             </td>
         </tr>
     );

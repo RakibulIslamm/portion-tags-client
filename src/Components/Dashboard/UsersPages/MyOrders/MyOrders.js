@@ -7,7 +7,7 @@ import { confirmAlert } from 'react-confirm-alert';
 const MyOrders = () => {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(false);
-    const { user, logOut } = useAuth();
+    const { user } = useAuth();
 
     useEffect(() => {
         setLoading(true);
@@ -19,7 +19,7 @@ const MyOrders = () => {
             .catch(err => console.log(err))
             .finally(() => setLoading(false)); */
 
-        fetch(`http://localhost:5000/myorders?email=${user?.email}`, {
+        fetch(`https://portion-tags.herokuapp.com/myorders?email=${user?.email}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`

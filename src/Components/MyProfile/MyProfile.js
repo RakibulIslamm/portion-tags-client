@@ -9,10 +9,10 @@ const MyProfile = () => {
     return (
         <div>
             <Header />
-            <div className='px-[80px] max-w-[1920px] mx-auto'>
+            <div className='px-[80px] xs:px-6 max-w-[1920px] mx-auto'>
                 <div className='flex items-center w-full min-h-screen'>
                     <div className='flex items-start gap-6 w-full py-6'>
-                        <div className='w-[250px] min-h-[80vh] p-4 bg-gray-900 text-white rounded-xl flex flex-col justify-between'>
+                        <div className='w-[250px] min-h-[80vh] p-4 bg-gray-900 text-white rounded-xl flex flex-col justify-between xs:hidden'>
                             <div className='space-y-3'>
                                 <SideBarLink to='/profile'>
                                     <span className="flex items-center p-2 space-x-3 rounded-md">
@@ -43,6 +43,7 @@ const MyProfile = () => {
                         </div>
                         <div className='flex-1'>
                             <Outlet />
+                            <Link to='/profile/edit-profile'>Edit Profile</Link>
                         </div>
                     </div>
                 </div>

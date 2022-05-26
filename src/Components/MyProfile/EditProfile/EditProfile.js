@@ -116,12 +116,12 @@ const EditProfile = () => {
                                 <label htmlFor="">Country</label><br />
                                 <input name='country' className='px-4 py-2 border border-gray-500 w-full rounded' type="text" placeholder='Country' />
                             </div>
-                            <div className='flex items-center gap-5'>
-                                <div className='flex-1'>
+                            <div className='flex items-center xs:flex-col gap-5'>
+                                <div className='flex-1 xs:w-full'>
                                     <label htmlFor="">Street Address</label><br />
                                     <input name='street' className='px-4 py-2 border border-gray-500 w-full rounded' type="text" />
                                 </div>
-                                <div className='flex-3'>
+                                <div className='flex-3 xs:w-full'>
                                     <label htmlFor="">Zip Code</label><br />
                                     <input name='zip' className='px-4 py-2 border border-gray-500 w-full rounded' type="text" />
                                 </div>
