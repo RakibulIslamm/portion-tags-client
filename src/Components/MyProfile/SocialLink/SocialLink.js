@@ -9,15 +9,18 @@ const SocialLink = () => {
     if (isLoading) {
         return;
     }
-    console.log(data);
-    const { linkedin, twitter } = data.userInfo.socialInfo;
+    // console.log(data);
+    // const { linkedin, twitter } = data.userInfo.socialInfo;
     return (
         <div>
             <h1 className='text-left text-2xl font-bold mb-4'>Social Link</h1>
-            <div className=' space-y-2'>
-                <Link className='text-lg text-blue-700 font-medium' target='_blank' to={linkedin}>Linkedin</Link><br />
-                <Link className='text-lg text-blue-700 font-medium' target='_blank' to={twitter}>Twitter</Link>
-            </div>
+            {
+                !data.userInfo ? 'Social Link is Not Set Yet' :
+                    <div className=' space-y-2'>
+                        <Link className='text-lg text-blue-700 font-medium' target='_blank' to={data.userInfo.socialInfo?.linkedin}>Linkedin</Link><br />
+                        <Link className='text-lg text-blue-700 font-medium' target='_blank' to={data.userInfo.socialInfo?.twitter}>Twitter</Link>
+                    </div>
+            }
         </div>
     );
 };

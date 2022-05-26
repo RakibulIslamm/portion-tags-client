@@ -21,7 +21,19 @@ const Login = () => {
             .then(result => {
                 setUser(result.user);
                 savedDataOnDb(result.user.displayName, result.user.email);
-                navigate(url);
+                fetch('http://localhost:5000/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: result.user.email })
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('token', data.token);
+                        navigate(url);
+                    })
+            })
+            .catch(err => {
+                console.log(err)
             })
     }
 

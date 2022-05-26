@@ -28,7 +28,7 @@ const MyOrderRow = ({ order, handleDelete }) => {
                         <button className="text-white text-sm bg-green-400 font-semibold px-4 py-1 rounded-full"> Paid </button>}
             </td>
             <td className="px-6 py-4 text-center"> {
-                !paid ? <Link to="/edit-inventory/id" className="text-purple-800 hover:underline">Payment</Link> :
+                !paid ? <Link to={`/dashboard/payment/${_id}`} className="text-purple-800 hover:underline">Payment</Link> :
                     <p>{transectionId}</p>
             }
             </td>

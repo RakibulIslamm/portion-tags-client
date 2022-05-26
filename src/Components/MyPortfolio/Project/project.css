@@ -1,0 +1,5 @@
+.bg:hover .content {
+    transform: translate(0);
+    scale: 1;
+    background: rgba(0, 0, 0, 0.9);
+}

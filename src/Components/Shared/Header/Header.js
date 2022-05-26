@@ -27,21 +27,21 @@ const Header = () => {
     };
 
     return (
-        <header className='max-w-[1920] px-[80px] h-[60px] flex justify-between items-center sticky z-50 text-white mix-blend-difference border-b border-gray-600'>
+        <header className='max-w-[1920] px-[80px] xs:px-6 h-[60px] flex justify-between items-center sticky z-50 text-white mix-blend-difference border-b border-gray-600'>
             <div className='flex items-center gap-3'>
-                <BsNutFill className='text-2xl' />
-                <h1 className='text-2xl font-bold uppercase'><Link to='/'>Portion Tags</Link></h1>
+                <BsNutFill className='text-2xl xs:text-lg' />
+                <h1 className='text-2xl xs:text-lg font-bold uppercase'><Link to='/'>Portion Tags</Link></h1>
             </div>
             <div>
-                <nav className='flex items-center gap-8 font-light tracking-widest'>
+                <nav className='flex items-center gap-8 font-light tracking-widest xs:hidden'>
                     <HeaderLink to='/'>Home</HeaderLink>
                     <HeaderLink to='/about'>About</HeaderLink>
-                    <HeaderLink to='/about'>Services</HeaderLink>
-                    <HeaderLink to='/about'>Resources</HeaderLink>
+                    <HeaderLink to='/portfolio'>Portfolio</HeaderLink>
+                    <HeaderLink to='/blogs'>Blogs</HeaderLink>
                 </nav>
             </div>
             {user && <div className='flex items-center gap-5'>
-                <button onClick={logOut}>Log Out</button>
+                <button className='xs:hidden' onClick={logOut}>Log Out</button>
                 <Link to='/dashboard'>Dashboard</Link>
                 <img className='w-7 h-7 bg-cover' src={userImg} alt="" />
             </div>}

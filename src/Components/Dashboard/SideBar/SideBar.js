@@ -7,7 +7,7 @@ import useAuth from '../../../hooks/useAuth';
 
 const SideBar = ({ setIsOpen, isOpen }) => {
     const { SideBarLink } = customLink();
-    const { user, logOut } = useAuth();
+    const { user, logOut, admin } = useAuth();
 
     return (
         <div className={`w-60 dark:bg-gray-900 min-h-screen sticky top-0 flex flex-col justify-between p-3  dark:text-gray-100`}>
@@ -30,52 +30,52 @@ const SideBar = ({ setIsOpen, isOpen }) => {
                             </span>
                         </SideBarLink>
 
-                        <SideBarLink to='/dashboard/manage-orders'>
+                        {admin && <SideBarLink to='/dashboard/manage-orders'>
                             <span className="flex items-center p-2 space-x-3 rounded-md">
                                 <FiEdit className='text-xl' />
                                 <span>Manage Orders</span>
                             </span>
-                        </SideBarLink>
+                        </SideBarLink>}
 
-                        <SideBarLink to='/dashboard/add-product'>
+                        {admin && <SideBarLink to='/dashboard/add-product'>
                             <span className="flex items-center p-2 space-x-3 rounded-md">
                                 <AiOutlineAppstoreAdd className='text-xl' />
                                 <span>Add Product</span>
                             </span>
-                        </SideBarLink>
+                        </SideBarLink>}
 
-                        <SideBarLink to='/dashboard/add-review'>
+                        {!admin && <SideBarLink to='/dashboard/add-review'>
                             <span className="flex items-center p-2 space-x-3 rounded-md">
                                 <BsFillStarFill className='text-xl' />
                                 <span>Add A Review</span>
                             </span>
-                        </SideBarLink>
+                        </SideBarLink>}
 
-                        <SideBarLink to='/dashboard/my-orders'>
+                        {!admin && <SideBarLink to='/dashboard/my-orders'>
                             <span className="flex items-center p-2 space-x-3 rounded-md">
                                 <BsCartFill className='text-xl' />
                                 <span>My Orders</span>
                             </span>
-                        </SideBarLink>
+                        </SideBarLink>}
 
-                        <SideBarLink to='/dashboard/manage-products'>
+                        {admin && <SideBarLink to='/dashboard/manage-products'>
                             <span className="flex items-center p-2 space-x-3 rounded-md">
                                 <BsInboxesFill className='text-xl' />
                                 <span>Manage All Products</span>
                             </span>
-                        </SideBarLink>
-                        <SideBarLink to='/dashboard/make-admin'>
+                        </SideBarLink>}
+                        {admin && <SideBarLink to='/dashboard/make-admin'>
                             <span className="flex items-center p-2 space-x-3 rounded-md">
                                 <AiOutlineUserAdd className='text-xl' />
                                 <span>Make An Admin</span>
                             </span>
-                        </SideBarLink>
-                        <SideBarLink to='/dashboard/all-users'>
+                        </SideBarLink>}
+                        {admin && <SideBarLink to='/dashboard/all-users'>
                             <span className="flex items-center p-2 space-x-3 rounded-md">
                                 <BsPeople className='text-xl' />
                                 <span>Manage Users</span>
                             </span>
-                        </SideBarLink>
+                        </SideBarLink>}
 
                         <button onClick={logOut}>
                             <span className="flex items-center p-2 space-x-3 rounded-md">

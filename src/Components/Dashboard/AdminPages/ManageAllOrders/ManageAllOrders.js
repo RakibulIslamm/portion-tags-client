@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import Alert from '../../../Alert/Alert';
 import OrderRow from './OrderRow/OrderRow';
+import { confirmAlert } from 'react-confirm-alert';
 
 const ManageAllOrders = () => {
     const [orders, setOrders] = useState([]);
@@ -7,7 +9,7 @@ const ManageAllOrders = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetch('http://localhost:5000/orders')
+        fetch('https://portion-tags.herokuapp.com/orders')
             .then(res => res.json())
             .then(data => {
                 setOrders(data);
@@ -16,53 +18,75 @@ const ManageAllOrders = () => {
             .finally(() => setLoading(false));
     }, []);
 
+
     const handleDelete = (id) => {
-        const confirm = window.confirm('Are you sure you want to delete this order?');
-        if (confirm) {
-            fetch(`http://localhost:5000/orders/${id}`, {
-                method: 'DELETE'
-            })
-                .then(res => res.json())
-                .then(data => {
-                    setOrders(orders.filter(order => order._id !== id));
+        const handleAlert = (close, confirmation) => {
+            if (confirmation) {
+                fetch(`https://portion-tags.herokuapp.com/orders/${id}`, {
+                    method: 'DELETE'
                 })
-                .catch(err => console.log(err))
-                .finally(() => setLoading(false));
+                    .then(res => res.json())
+                    .then(data => {
+                        setOrders(orders.filter(order => order._id !== id));
+                    })
+                    .catch(err => console.log(err))
+                    .finally(() => setLoading(false));
+            }
+            else {
+                close();
+                setLoading(false);
+            }
+            close();
         }
-        else {
-            setLoading(false);
-        }
+        confirmAlert({
+            customUI: ({ onClose }) => {
+                return (
+                    <Alert onClose={onClose} handleAlert={handleAlert} action='delete' />
+                )
+            }
+        });
     }
 
     const shippedOrder = (id) => {
-        const confirm = window.confirm('Are you sure you want to shipped this order?');
-        if (confirm) {
-            fetch(`http://localhost:5000/orders/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    status: 'shipped'
+        const handleAlert = (close, confirmation) => {
+            if (confirmation) {
+                fetch(`https://portion-tags.herokuapp.com/orders/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        status: 'shipped'
+                    })
                 })
-            })
-                .then(res => res.json())
-                .then(data => {
-                    const changedOrder = orders.map(order => {
-                        if (order._id === id) {
-                            order.status = 'shipped';
-                        }
-                        return order;
-                    });
-                    console.log(changedOrder);
-                    setOrders(changedOrder);
-                })
-                .catch(err => console.log(err))
-                .finally(() => setLoading(false));
+                    .then(res => res.json())
+                    .then(data => {
+                        const changedOrder = orders.map(order => {
+                            if (order._id === id) {
+                                order.status = 'shipped';
+                            }
+                            return order;
+                        });
+                        console.log(changedOrder);
+                        setOrders(changedOrder);
+                    })
+                    .catch(err => console.log(err))
+                    .finally(() => setLoading(false));
+            }
+            else {
+                close();
+                setLoading(false);
+            }
+            close();
         }
-        else {
-            setLoading(false);
-        }
+        confirmAlert({
+            customUI: ({ onClose }) => {
+                return (
+                    <Alert onClose={onClose} handleAlert={handleAlert} action='delete' />
+                )
+            }
+        });
+
     }
 
 
@@ -97,7 +121,7 @@ const ManageAllOrders = () => {
                                         <p className="text-gray-500 text-xl font-semibold tracking-wide"> Product Not Found </p>
                                     </td>
                                 </tr>
-                            </tbody> : <tbody className="divide-y divide-gray-200">
+                            </tbody> : <tbody className="divide-y divide-gray-200 w-full">
                                 {orders.map(order => <OrderRow key={order._id} order={order} handleDelete={handleDelete} shippedOrder={shippedOrder} />)}
                             </tbody>
                         }

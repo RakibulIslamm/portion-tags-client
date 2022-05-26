@@ -1,0 +1,35 @@
+[
+    {
+        "projectName": "Jewelliaa (Niche website) – Full-Stack",
+        "shortDesc": "Developed a jewelry niche website where a user would buy products and post ratings",
+        "desc": "",
+        "coverImg": "https://i.ibb.co/7WLJL4q/jewelliaa.png",
+        "tecUsed": "Tailwind, React, Firebase, express, mongodb, dotenv, Heroku",
+        "clientLink": "https://github.com/RakibulIslamm/jewelliaa-niche-website",
+        "serverLink": "https://github.com/RakibulIslamm/-jewelliaa-niche-website-server",
+        "liveLink": "https://jewelliaa.web.app/",
+        "images": ""
+    },
+    {
+        "projectName": "Travelzen (Tour booking website) – Full-Stack",
+        "shortDesc": "It is a simple tour booking website with booking functionality.",
+        "desc": "",
+        "coverImg": "https://i.ibb.co/z4XZp8V/travelzen.png",
+        "tecUsed": "Tailwind, React, Firebase, express, mongodb, dotenv, Heroku",
+        "clientLink": "https://github.com/RakibulIslamm/travelzen-tour-booking-website",
+        "serverLink": "https://github.com/RakibulIslamm/travelzen-tour-booking-website-server",
+        "liveLink": "https://travelzen-5b237.web.app/",
+        "images": ""
+    },
+    {
+        "projectName": "Dental (Dental care website) – Front-End",
+        "shortDesc": "In this project, I built a dental care appointment booking website.",
+        "desc": "",
+        "coverImg": "https://i.ibb.co/1ZX324d/dental.png",
+        "tecUsed": "React, Tailwind, Firebase",
+        "clientLink": "https://github.com/RakibulIslamm/dental-website",
+        "serverLink": "",
+        "liveLink": "https://dental-assignment-10.web.app/",
+        "images": ""
+    }
+]

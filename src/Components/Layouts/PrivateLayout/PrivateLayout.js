@@ -6,7 +6,7 @@ const PrivateLayout = () => {
     return (
         <>
             <div className='flex'>
-                <div className=''>
+                <div className=' xs:hidden'>
                     <SideBar />
                 </div>
                 <div className='w-full'>

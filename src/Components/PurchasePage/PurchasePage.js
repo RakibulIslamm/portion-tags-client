@@ -14,7 +14,7 @@ const PurchasePage = () => {
     // console.log(id);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/products/${id}`)
+        fetch(`https://portion-tags.herokuapp.com/products/${id}`)
             .then(res => res.json())
             .then(data => setProduct(data))
             .catch(err => console.log(err.message));

@@ -4,7 +4,7 @@ import Review from './Review/Review';
 const Reviews = () => {
     return (
         <div className='py-10'>
-            <div className='px-[80px] max-w-[1920px]'>
+            <div className='px-[80px] xs:px-6 max-w-[1920px]'>
                 <div className='flex justify-between items-center gap-4 pb-6'>
                     <div className='border border-gray-300 flex-1'></div>
                     <div>
@@ -13,7 +13,7 @@ const Reviews = () => {
                     </div>
                     <div className='border border-gray-300 flex-1'></div>
                 </div>
-                <div className='mx-auto grid grid-cols-3 gap-4'>
+                <div className='mx-auto grid grid-cols-3 xs:grid-cols-1 gap-4'>
                     <Review />
                 </div>
             </div>

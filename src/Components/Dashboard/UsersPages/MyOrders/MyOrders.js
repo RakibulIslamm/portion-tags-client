@@ -1,40 +1,77 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../../../hooks/useAuth';
+import Alert from '../../../Alert/Alert';
 import MyOrderRow from './MyOrderRow/MyOrderRow';
+import { confirmAlert } from 'react-confirm-alert';
 
 const MyOrders = () => {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(false);
-    const { user } = useAuth();
+    const { user, logOut } = useAuth();
 
     useEffect(() => {
         setLoading(true);
-        fetch(`http://localhost:5000/orders?email=${user?.email}`)
+        /* fetch(`https://portion-tags.herokuapp.com/myorders?email=${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 setOrders(data);
             })
             .catch(err => console.log(err))
-            .finally(() => setLoading(false));
+            .finally(() => setLoading(false)); */
+
+        fetch(`http://localhost:5000/myorders?email=${user?.email}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.statusCode === 403) {
+                    // logOut()
+                }
+                else {
+                    setOrders(data.reverse());
+                }
+            })
+            .catch(err => {
+                console.log(err.code);
+            })
+            .finally(() => {
+                setLoading(false);
+            })
+
     }, [user]);
 
+
+
+
     const handleDelete = (id) => {
-        setLoading(true);
-        const confirm = window.confirm('Are you sure you want to delete this order?');
-        if (confirm) {
-            fetch(`http://localhost:5000/orders/${id}`, {
-                method: 'DELETE'
-            })
-                .then(res => res.json())
-                .then(data => {
-                    setOrders(orders.filter(order => order._id !== id));
-                    setLoading(false);
+        const handleAlert = (close, confirmation) => {
+            if (confirmation) {
+                fetch(`https://portion-tags.herokuapp.com/orders/${id}`, {
+                    method: 'DELETE'
                 })
-                .catch(err => console.log(err));
+                    .then(res => res.json())
+                    .then(data => {
+                        setOrders(orders.filter(order => order._id !== id));
+                    })
+                    .catch(err => console.log(err))
+                    .finally(() => setLoading(false));
+            }
+            else {
+                close();
+                setLoading(false);
+            }
+            close();
         }
-        else {
-            setLoading(false);
-        }
+        confirmAlert({
+            customUI: ({ onClose }) => {
+                return (
+                    <Alert onClose={onClose} handleAlert={handleAlert} action='delete' />
+                )
+            }
+        });
     }
 
     return (

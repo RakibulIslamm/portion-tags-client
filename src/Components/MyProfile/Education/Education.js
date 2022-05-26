@@ -8,15 +8,18 @@ const Education = () => {
     if (isLoading) {
         return;
     }
-    console.log(data);
-    const { institution, educationLevel, degree } = data.userInfo.educationInfo;
+    // console.log(data);
+    // const { institution, educationLevel, degree } = data.userInfo.educationInfo;
     return (
         <div>
             <h1 className='text-left text-2xl font-bold mb-4'>Education</h1>
-            <div>
-                <p className='text-left text-base font-semibold'>{degree} in {educationLevel} at</p>
-                <h1 className='text-left text-xl font-semibold'>Institute: {institution}</h1>
-            </div>
+            {
+                !data?.userInfo ? 'Education is Not Set Yet' :
+                    <div>
+                        <p className='text-left text-base font-semibold'>{data.userInfo.educationInfo?.degree} in {data.userInfo.educationInfo?.educationLevel} at</p>
+                        <h1 className='text-left text-xl font-semibold'>Institute: {data.userInfo.educationInfo?.institution}</h1>
+                    </div>
+            }
         </div>
     );
 };

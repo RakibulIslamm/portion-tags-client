@@ -9,7 +9,7 @@ const EditProfile = () => {
     const [currentUser, setCurrentUser] = useState(user);
     const { data: currentUserData, isLoading } = useQuery("user", async () => {
         const { data } = await axios.get(
-            `http://localhost:5000/user/${user.email}`
+            `https://portion-tags.herokuapp.com/user/${user.email}`
         );
         if (isLoading) {
             return;
@@ -43,7 +43,7 @@ const EditProfile = () => {
         // console.log(profileData);
 
         // update profile
-        fetch(`http://localhost:5000/user/${currentUser._id}`, {
+        fetch(`https://portion-tags.herokuapp.com/user/${currentUser._id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

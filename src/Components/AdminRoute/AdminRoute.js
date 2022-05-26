@@ -1,8 +1,9 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import Spinner from "../Spinner/Spinner";
 
 function AdminRoute({ children }) {
-    const { admin, isLoading2 } = useAuth();
+    const { admin, adminLoading } = useAuth();
     let location = useLocation();
     /* const { data: posts } = useQuery("posts", async () => {
         const { data } = await axios.get(
@@ -12,8 +13,8 @@ function AdminRoute({ children }) {
     });
     console.log(posts); */
 
-    if (isLoading2) {
-        return
+    if (adminLoading) {
+        return <Spinner />;
     }
 
 

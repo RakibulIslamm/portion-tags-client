@@ -19,7 +19,7 @@ const AddReview = () => {
     const onSubmit = data => {
         setLoading(true);
         const ratingsData = { name: user.displayName, reviewText: data.reviewText, rating: values.rating }
-        fetch('http://localhost:5000/reviews', {
+        fetch('https://portion-tags.herokuapp.com/reviews', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

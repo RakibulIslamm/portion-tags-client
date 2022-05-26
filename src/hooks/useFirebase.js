@@ -12,6 +12,7 @@ const useFirebase = () => {
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const [isLoading2, setIsLoading2] = useState(true);
+    const [adminLoading, setAdminLoading] = useState(true);
 
     const auth = getAuth()
 
@@ -29,7 +30,16 @@ const useFirebase = () => {
             .then((result) => {
                 setUser(result.user)
                 const url = location?.state?.from || '/dashboard';
-                navigate(url);
+                fetch('http://localhost:5000/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: result.user.email })
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('token', data.token);
+                        navigate(url);
+                    })
                 reset();
             })
             .catch((error) => {
@@ -78,7 +88,16 @@ const useFirebase = () => {
                         toast.success('Verification Mail Sent Your Email');
                     });
                 savedDataOnDb(user.displayName, user.email);
-                navigate('/dashboard')
+                fetch('http://localhost:5000/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: result.user.email })
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('token', data.token);
+                        navigate('/dashboard');
+                    })
                 reset();
             })
             .catch((error) => {
@@ -100,12 +119,13 @@ const useFirebase = () => {
 
             }
             setIsLoading(false);
+            setIsLoading2(false);
         })
     }, [auth]);
 
     // Save user data on db
     const savedDataOnDb = (name, email) => {
-        fetch('http://localhost:5000/users', {
+        fetch('https://portion-tags.herokuapp.com/users', {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -126,7 +146,7 @@ const useFirebase = () => {
 
     useEffect(() => {
         if (!user) return
-        const url = `http://localhost:5000/admin/${user?.email}`;
+        const url = `https://portion-tags.herokuapp.com/admin/${user?.email}`;
         fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -134,7 +154,7 @@ const useFirebase = () => {
             })
             .catch(error => setError(error))
             .finally(() => {
-                setIsLoading2(false)
+                setAdminLoading(false)
             })
     }, [user]);
 
@@ -143,6 +163,7 @@ const useFirebase = () => {
         signOut(auth)
             .then(() => {
                 setUser(null);
+                localStorage.removeItem('token');
                 console.log('Logged Out Successfully');
             })
     };
@@ -161,36 +182,10 @@ const useFirebase = () => {
         savedDataOnDb,
         admin,
         setIsLoading2,
+        adminLoading,
         logOut
     }
 
 }
 
 export default useFirebase;
-
-/* // Make admin
-app.put('/make-admin/:email', async (req, res) => {
-    const email = req.body.email;
-    const CurrentUserEmail = req.params.email;
-    const user = await userCollection.findOne({ email: CurrentUserEmail });
-    console.log(user);
-    if (!user) {
-        res.json('403 Forbidden')
-    }
-    else if (user.role === 'admin') {
-        const filter = { email: email };
-        const dbUser = await userCollection.findOne(filter);
-        if (dbUser) {
-            const updateDoc = { $set: { role: 'admin' } };
-            const result = await userCollection.updateOne(filter, updateDoc);
-            res.json(result);
-        }
-        else {
-            res.json({ error: `We Couldn't find this ${email} user` });
-        }
-    }
-    else {
-        res.json({ error: "You are not authorize" });
-    }
-
-}); */

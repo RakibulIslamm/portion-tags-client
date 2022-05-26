@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
+import Alert from '../../../Alert/Alert';
 import ProductRow from './ProductRow/ProductRow';
+import { confirmAlert } from 'react-confirm-alert';
+import { toast } from 'react-toastify';
 
 const ManageAllProducts = () => {
     const [products, setProducts] = useState([]);
@@ -7,7 +10,7 @@ const ManageAllProducts = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetch('http://localhost:5000/products')
+        fetch('https://portion-tags.herokuapp.com/products')
             .then(res => res.json())
             .then(data => {
                 setProducts(data.reverse());
@@ -17,21 +20,33 @@ const ManageAllProducts = () => {
     }, []);
 
     const handleDelete = (id) => {
-        const confirm = window.confirm('Are you sure you want to delete this order?');
-        if (confirm) {
-            fetch(`http://localhost:5000/product/${id}`, {
-                method: 'DELETE'
-            })
-                .then(res => res.json())
-                .then(data => {
-                    setProducts(products.filter(order => order._id !== id));
+        const handleAlert = (close, confirmation) => {
+
+            if (confirmation) {
+                fetch(`https://portion-tags.herokuapp.com/product/${id}`, {
+                    method: 'DELETE'
                 })
-                .catch(err => console.log(err))
-                .finally(() => setLoading(false));
+                    .then(res => res.json())
+                    .then(data => {
+                        setProducts(products.filter(order => order._id !== id));
+                        toast.success('Product Deleted')
+                    })
+                    .catch(err => console.log(err))
+                    .finally(() => setLoading(false));
+            }
+            else {
+                setLoading(false);
+                close();
+            }
+            close();
         }
-        else {
-            setLoading(false);
-        }
+        confirmAlert({
+            customUI: ({ onClose }) => {
+                return (
+                    <Alert onClose={onClose} handleAlert={handleAlert} action='delete' />
+                )
+            }
+        });
     }
 
 
@@ -39,7 +54,7 @@ const ManageAllProducts = () => {
         <div className='min-h-screen'>
             <div className='px-[80px] xs:px-4 sm:px-10 max-w-[1920px] mx-auto'>
                 <div className='my-5 flex items-center gap-5'>
-                    <h2 className='text-2xl xs:text-lg xs:w-full font-semibold'>Manage Order</h2>
+                    <h2 className='text-2xl xs:text-lg xs:w-full font-semibold'>Manage Products</h2>
                 </div>
                 <div className='overflow-x-auto border w-full'>
                     <table className='mx-auto w-full rounded-lg bg-white divide-y divide-gray-300'>

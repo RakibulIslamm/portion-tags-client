@@ -14,7 +14,7 @@ const PurchaseForm = ({ user, product }) => {
     const onSubmit = data => {
         const orderData = { ...data, status: false, paid: false, ProductName, img, name: user.displayName, email: user.email, productId: _id };
         console.log(orderData);
-        fetch('http://localhost:5000/orders', {
+        fetch('https://portion-tags.herokuapp.com/orders', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

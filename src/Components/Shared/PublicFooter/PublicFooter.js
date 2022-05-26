@@ -6,7 +6,7 @@ const PublicFooter = () => {
     return (
         <div className='bg-gray-800'>
             <footer className="">
-                <div className="flex justify-between px-[80px] py-10">
+                <div className="flex justify-between px-[80px] xs:px-6 xs:flex-col py-10">
                     <div className="mb-6 md:mb-0">
                         <Link to="/" className="flex items-center gap-2">
                             <BsNutFill className='text-3xl text-white' />
@@ -81,8 +81,8 @@ const PublicFooter = () => {
                 </div>
                 <div />
                 <hr className=" border-gray-200 sm:mx-auto dark:border-gray-700" />
-                <div className='px-[80px]'>
-                    <div className=" flex justify-between items-center py-3">
+                <div className='px-[80px] xs:px-6'>
+                    <div className=" flex justify-between xs:flex-col items-center py-3">
                         <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2022 <Link to="https://flowbite.com" className="hover:underline">Portion Tags</Link>. All Rights Reserved.
                         </span>
                         <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
