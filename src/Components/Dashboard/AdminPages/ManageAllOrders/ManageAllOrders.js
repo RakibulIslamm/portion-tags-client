@@ -63,7 +63,7 @@ const ManageAllOrders = () => {
                     .then(data => {
                         const changedOrder = orders.map(order => {
                             if (order._id === id) {
-                                order.status = 'Approve';
+                                order.status = 'shipped';
                             }
                             return order;
                         });
@@ -82,7 +82,7 @@ const ManageAllOrders = () => {
         confirmAlert({
             customUI: ({ onClose }) => {
                 return (
-                    <Alert onClose={onClose} handleAlert={handleAlert} action='delete' />
+                    <Alert onClose={onClose} handleAlert={handleAlert} action='Approve' />
                 )
             }
         });
