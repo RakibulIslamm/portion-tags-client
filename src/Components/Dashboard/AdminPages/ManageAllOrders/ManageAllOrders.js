@@ -41,7 +41,7 @@ const ManageAllOrders = () => {
         confirmAlert({
             customUI: ({ onClose }) => {
                 return (
-                    <Alert onClose={onClose} handleAlert={handleAlert} action='delete' />
+                    <Alert onClose={onClose} handleAlert={handleAlert} action='Approve' />
                 )
             }
         });
