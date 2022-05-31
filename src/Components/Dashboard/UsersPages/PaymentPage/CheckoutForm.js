@@ -10,7 +10,7 @@ const CheckoutForm = ({ order }) => {
     const [cardError, setCardError] = useState('');
     const [processing, setProcessing] = useState(false);
     const [clientSecret, setClientSecret] = useState('');
-    const [transactionId, setTransactionId] = useState('');
+    // const [transactionId, setTransactionId] = useState('');
     const { price, quantity, name, email, _id } = order;
     const amount = parseFloat((price * quantity).toFixed(2));
 
@@ -96,7 +96,7 @@ const CheckoutForm = ({ order }) => {
             }
             else {
                 setCardError('');
-                setTransactionId(paymentIntent.id);
+                // setTransactionId(paymentIntent.id);
                 toast.success('Payment Successful');
 
                 fetch(`https://portion-tags.herokuapp.com/order/${_id}`, {

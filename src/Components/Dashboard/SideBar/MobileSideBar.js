@@ -1,22 +1,29 @@
 import { Link } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 import customLink from '../../CustomLink/CustomLink';
-import { AiFillHome, AiOutlineAppstoreAdd, AiOutlineUserAdd } from 'react-icons/ai';
+import Drawer from 'react-modern-drawer'
+import { AiFillHome, AiOutlineClose, AiOutlineAppstoreAdd, AiOutlineUserAdd } from 'react-icons/ai';
 import { FiEdit } from 'react-icons/fi';
 import { BsFillStarFill, BsCartFill, BsInboxesFill, BsPeople, BsNutFill, BsArrowRightSquare } from 'react-icons/bs';
-import useAuth from '../../../hooks/useAuth';
 
-const SideBar = () => {
+const MobileSideBar = ({ toggleDrawer, isOpen }) => {
     const { SideBarLink } = customLink();
     const { user, logOut, admin } = useAuth();
-
     return (
-        <>
-            <div className={`w-60 dark:bg-gray-900 min-h-screen sticky top-0 flex flex-col justify-between p-3  dark:text-gray-100`}>
+        <Drawer
+            open={isOpen}
+            onClose={toggleDrawer}
+            direction='left'
+        >
+            <div className={`w-full dark:bg-gray-900 min-h-screen fixed top-0 left-0 flex flex-col justify-between p-3  text-gray-100`}>
                 <div className="space-y-3">
                     <div className="flex items-center justify-between pb-3 border-b border-gray-700">
                         <h2 className='text-lg font-semibold'>
                             <Link className='flex items-center gap-2' to='/'><BsNutFill /> Portion Tags</Link>
                         </h2>
+                        <button onClick={toggleDrawer}>
+                            <AiOutlineClose />
+                        </button>
                     </div>
                     <div className="flex-1">
                         <ul className="pt-2 pb-4 space-y-1 text-sm">
@@ -94,8 +101,8 @@ const SideBar = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </Drawer>
     );
 };
 
-export default SideBar;
+export default MobileSideBar;
